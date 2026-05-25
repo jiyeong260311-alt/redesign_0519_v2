@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Melon Top Picks Redesign</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Noto Sans KR", sans-serif;
+    }
+
+    body {
+      overflow-x: hidden;
+      background: #f5fff7;
+    }
+
+    section {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f7fff8 0%, #ecfff2 45%, #ffffff 100%);
+      padding: 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 28px 100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+
+    header .logo {
+      text-decoration: none;
+      font-size: 34px;
+      font-weight: 900;
+      color: #00c73c;
+      letter-spacing: -1px;
+    }
+
+    header .logo span {
+      color: #111;
+      font-size: 15px;
+      font-weight: 800;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    header ul {
+      display: flex;
+      gap: 34px;
+    }
+
+    header ul li {
+      list-style: none;
+    }
+
+    header ul li a {
+      display: inline-block;
+      color: #222;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    header ul li a:hover {
+      color: #00c73c;
+    }
+
+    .content {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .content .textBox {
+      position: relative;
+      max-width: 620px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      margin-bottom: 20px;
+      border-radius: 999px;
+      background: rgba(0, 199, 60, 0.12);
+      color: #00a832;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .content .textBox h2 {
+      color: #111;
+      font-size: 4.6em;
+      line-height: 1.13em;
+      font-weight: 900;
+      letter-spacing: -3px;
+    }
+
+    .content .textBox h2 span {
+      color: #00c73c;
+      font-size: 1.03em;
+      font-weight: 900;
+    }
+
+    .songMeta {
+      margin-top: 18px;
+      color: #333;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+    }
+
+    .songDesc {
+      margin-top: 18px;
+      max-width: 540px;
+      color: #555;
+      font-size: 16px;
+      line-height: 1.8;
+      font-weight: 500;
+    }
+
+    .content .textBox a {
+      display: inline-block;
+      margin-top: 28px;
+      padding: 13px 28px;
+      background: #00c73c;
+      color: #fff;
+      border-radius: 40px;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: -0.2px;
+      text-decoration: none;
+      box-shadow: 0 16px 30px rgba(0, 199, 60, 0.24);
+      transition: 0.3s;
+    }
+
+    .content .textBox a:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 38px rgba(0, 199, 60, 0.32);
+    }
+
+    .content .imgBox {
+      width: 560px;
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 40px;
+      margin-top: 40px;
+    }
+
+    .albumCard {
+      position: relative;
+      width: 360px;
+      height: 500px;
+      border-radius: 42px;
+      padding: 34px;
+      background: linear-gradient(145deg, #111 0%, #2a2a2a 55%, #00c73c 100%);
+      color: #fff;
+      box-shadow: 0 42px 80px rgba(0, 0, 0, 0.28);
+      transition: 0.4s;
+      overflow: hidden;
+    }
+
+    .albumCard::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      right: -70px;
+      bottom: -70px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .albumCard::after {
+      content: "";
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      right: 70px;
+      bottom: 70px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .rank {
+      position: relative;
+      z-index: 2;
+      font-size: 15px;
+      font-weight: 900;
+      opacity: 0.85;
+    }
+
+    .coverText {
+      position: relative;
+      z-index: 2;
+      margin-top: 64px;
+      font-size: 86px;
+      line-height: 0.95;
+      font-weight: 900;
+      letter-spacing: -5px;
+    }
+
+    .albumInfo {
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      bottom: 34px;
+      z-index: 2;
+    }
+
+    .albumInfo h3 {
+      font-size: 33px;
+      line-height: 1.1;
+      letter-spacing: -1.6px;
+      margin-bottom: 10px;
+    }
+
+    .albumInfo p {
+      font-size: 15px;
+      font-weight: 700;
+      opacity: 0.78;
+    }
+
+    .soundBars {
+      position: absolute;
+      left: 34px;
+      bottom: 118px;
+      display: flex;
+      gap: 7px;
+      align-items: flex-end;
+      z-index: 2;
+    }
+
+    .soundBars span {
+      display: block;
+      width: 8px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.85);
+      animation: barMove 1.1s infinite ease-in-out;
+    }
+
+    .soundBars span:nth-child(1) { height: 28px; animation-delay: 0s; }
+    .soundBars span:nth-child(2) { height: 52px; animation-delay: 0.12s; }
+    .soundBars span:nth-child(3) { height: 38px; animation-delay: 0.24s; }
+    .soundBars span:nth-child(4) { height: 68px; animation-delay: 0.36s; }
+    .soundBars span:nth-child(5) { height: 44px; animation-delay: 0.48s; }
+
+    @keyframes barMove {
+      0%, 100% { transform: scaleY(0.6); opacity: 0.55; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    .thumb {
+      position: absolute;
+      bottom: 28px;
+      display: flex;
+      gap: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+    }
+
+    .thumb li {
+      list-style: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .thumb li:hover {
+      transform: translateY(-12px);
+    }
+
+    .thumbButton {
+      width: 150px;
+      min-height: 74px;
+      padding: 14px 16px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
+    }
+
+    .thumbButton strong {
+      display: block;
+      color: #111;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .thumbButton span {
+      display: block;
+      color: #666;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .sci {
+      position: absolute;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      z-index: 5;
+    }
+
+    .sci li {
+      list-style: none;
+    }
+
+    .sci li a {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      color: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 900;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      transition: 0.3s;
+    }
+
+    .sci li a:hover {
+      background: #00c73c;
+      color: #fff;
+      transform: translateX(-4px);
+    }
+
+    .circle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #00c73c;
+      clip-path: circle(620px at right 800px);
+      transition: 0.4s;
+    }
+
+    .notice {
+      position: absolute;
+      left: 100px;
+      bottom: 38px;
+      color: #777;
+      font-size: 12px;
+      font-weight: 600;
+      z-index: 4;
+    }
+
+    @media (max-width: 980px) {
+      section {
+        padding: 110px 28px 180px;
+      }
+
+      header {
+        padding: 24px 28px;
+      }
+
+      header ul {
+        display: none;
+      }
+
+      .content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 40px;
+      }
+
+      .content .textBox h2 {
+        font-size: 3.1em;
+      }
+
+      .content .imgBox {
+        width: 100%;
+        justify-content: center;
+        padding-right: 0;
+      }
+
+      .albumCard {
+        width: 310px;
+        height: 430px;
+      }
+
+      .coverText {
+        font-size: 70px;
+      }
+
+      .thumb {
+        width: 92%;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding-bottom: 8px;
+      }
+
+      .notice {
+        left: 28px;
+        bottom: 120px;
+      }
+
+      .sci {
+        right: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="circle"></div>
+
+    <header>
+      <a href="https://www.melon.com/" class="logo">Melon<span>TOP PICKS</span></a>
+
+      <ul>
+        <li><a href="https://www.melon.com/chart/index.htm">멜론차트</a></li>
+        <li><a href="https://www.melon.com/new/index.htm">최신음악</a></li>
+        <li><a href="https://www.melon.com/genre/song_list.htm">장르음악</a></li>
+        <li><a href="https://www.melon.com/dj/today/djtoday_list.htm">멜론DJ</a></li>
+      </ul>
+    </header>
+
+    <div class="content">
+      <div class="textBox">
+        <div class="badge" id="badge">Melon TOP100 · 2026.05.XX 10:00 기준</div>
+
+        <h2>
+          오늘 가장 뜨거운<br />
+          <span id="mainTitle">REDRED</span>
+        </h2>
+
+        <div class="songMeta" id="artistName">CORTIS (코르티스)</div>
+
+        <p class="songDesc" id="songDesc">
+          멜론 TOP100 1위 곡을 중심으로 만든 페이지입니다.
+        </p>
+
+        <a href="https://www.melon.com/chart/index.htm" target="_blank">TOP100 보러가기</a>
+      </div>
+
+      <div class="imgBox">
+        <div class="albumCard" id="albumCard">
+          <div class="rank" id="rankText">TOP 1</div>
+          <div class="coverText" id="coverText">RED<br>RED</div>
+
+          <div class="soundBars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+          <div class="albumInfo">
+            <h3 id="albumSong">REDRED</h3>
+            <p id="albumArtist">CORTIS (코르티스)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="thumb">
+      <li onclick="songSlider(0)">
+        <div class="thumbButton">
+          <strong>01 REDRED</strong>
+          <span>CORTIS</span>
+        </div>
+      </li>
+
+      <li onclick="songSlider(1)">
+        <div class="thumbButton">
+          <strong>02 소문의 낙원</strong>
+          <span>AKMU</span>
+        </div>
+      </li>
+
+      <li onclick="songSlider(2)">
+        <div class="thumbButton">
+          <strong>03 It's Me</strong>
+          <span>아일릿</span>
+        </div>
+      </li>
+
+      <li onclick="songSlider(3)">
+        <div class="thumbButton">
+          <strong>04 기쁨, 슬픔...</strong>
+          <span>AKMU</span>
+        </div>
+      </li>
+
+      <li onclick="songSlider(4)">
+        <div class="thumbButton">
+          <strong>05 캐치 캐치</strong>
+          <span>YENA</span>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="sci">
+      <li><a href="https://www.melon.com/chart/index.htm" target="_blank">TOP</a></li>
+      <li><a href="https://www.melon.com/new/index.htm" target="_blank">NEW</a></li>
+      <li><a href="https://www.melon.com/dj/today/djtoday_list.htm" target="_blank">DJ</a></li>
+    </ul>
+
+  </section>
+
+  <script>
+    const songs = [
+      {
+        rank: "TOP 1",
+        title: "REDRED",
+        artist: "CORTIS (코르티스)",
+        cover: "RED<br>RED",
+        desc: "2026년 4월 20일에 발매된 CORTIS의 두 번째 EP 《GREENGREEN》의 리드 싱글이자 타이틀곡입니다.",
+        circle: "#00c73c",
+        card: "linear-gradient(145deg, #111 0%, #2a2a2a 55%, #00c73c 100%)"
+      },
+      {
+        rank: "TOP 2",
+        title: "소문의 낙원",
+        artist: "AKMU (악뮤)",
+        cover: "낙원",
+        desc: "2026년 4월 7일에 발매된 AKMU의 네 번째 정규 앨범《The 4th Full Album》의 리드 싱글입니다.",
+        circle: "#4cc9a6",
+        card: "linear-gradient(145deg, #0f4037 0%, #4cc9a6 60%, #c9f7e7 100%)"
+      },
+      {
+        rank: "TOP 3",
+        title: "It's Me",
+        artist: "아일릿(ILLIT)",
+        cover: "IT'S<br>ME",
+        desc: "2026년 4월 30일에 발매된 ILLIT의 네 번째 미니 앨범《It's Me》의 타이틀곡입니다.",
+        circle: "#b7f14a",
+        card: "linear-gradient(145deg, #202400 0%, #9be23a 58%, #f3ff9c 100%)"
+      },
+      {
+        rank: "TOP 4",
+        title: "기쁨, 슬픔, 아름다운 마음",
+        artist: "AKMU (악뮤)",
+        cover: "마음",
+        desc: "AKMU(악뮤)의 정규 앨범 타이틀곡 '기쁨, 슬픔, 아름다운 마음'에 대한 감상이시군요. 멤버 이수현의 슬럼프를 이겨낸 서사를 담아내어 큰 위로와 감동을 주는 곡입니다.",
+        circle: "#8f7cf6",
+        card: "linear-gradient(145deg, #211b45 0%, #8f7cf6 60%, #dcd6ff 100%)"
+      },
+      {
+        rank: "TOP 5",
+        title: "캐치 캐치",
+        artist: "YENA (최예나)",
+        cover: "CATCH",
+        desc: "2026년 3월 17일에 발매된 최예나의 디지털 싱글이자 미니 5집 LOVE CATCHER의 타이틀곡 캐치 캐치의 리믹스 음원이다.",
+        circle: "#ff78aa",
+        card: "linear-gradient(145deg, #3b0f24 0%, #ff78aa 55%, #b9ffcf 100%)"
+      }
+    ];
+
+    function songSlider(index) {
+      const song = songs[index];
+
+      document.getElementById("rankText").innerHTML = song.rank;
+      document.getElementById("mainTitle").innerHTML = song.title;
+      document.getElementById("artistName").innerHTML = song.artist;
+      document.getElementById("songDesc").innerHTML = song.desc;
+      document.getElementById("coverText").innerHTML = song.cover;
+      document.getElementById("albumSong").innerHTML = song.title;
+      document.getElementById("albumArtist").innerHTML = song.artist;
+
+      document.querySelector(".circle").style.background = song.circle;
+      document.getElementById("albumCard").style.background = song.card;
+    }
+  </script>
+</body>
+</html>
