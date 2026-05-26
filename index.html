@@ -14,7 +14,7 @@
         --melon-light: rgba(0, 199, 60, 0.12);
 
         --red-point: #e53935;
-        --blue-point: #4a90e2;
+        --blue-point: #5dadee;
         --mint-point: #58d2b2;
         --pink-point: #ff86b5;
       }
@@ -154,25 +154,53 @@
         font-weight: 500;
       }
 
-      .content .textBox a {
-        display: inline-block;
+      .actionButtons {
+        display: flex;
+        align-items: center;
+        gap: 14px;
         margin-top: 28px;
+        flex-wrap: wrap;
+      }
+
+      .listenBtn,
+      .melonBtn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 170px;
         padding: 13px 28px;
-        background: var(--melon-green);
-        color: #fff;
         border-radius: 40px;
         font-size: 15px;
         font-weight: 900;
         letter-spacing: -0.2px;
         text-decoration: none;
-        box-shadow: 0 16px 30px rgba(0, 199, 60, 0.24);
         transition: 0.3s;
         cursor: pointer;
       }
 
-      .content .textBox a:hover {
+      .listenBtn {
+        background: var(--melon-green);
+        color: #fff;
+        box-shadow: 0 16px 30px rgba(0, 199, 60, 0.24);
+      }
+
+      .listenBtn:hover {
         transform: translateY(-3px);
         box-shadow: 0 20px 38px rgba(0, 199, 60, 0.32);
+      }
+
+      .melonBtn {
+        background: #ffffff;
+        color: #111;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+      }
+
+      .melonBtn:hover {
+        transform: translateY(-3px);
+        color: var(--melon-green);
+        border-color: rgba(0, 199, 60, 0.35);
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.12);
       }
 
       .content .imgBox {
@@ -228,6 +256,7 @@
         from {
           transform: rotate(0deg);
         }
+
         to {
           transform: rotate(360deg);
         }
@@ -243,9 +272,11 @@
         0% {
           transform: scale(0.97) rotate(0deg);
         }
+
         55% {
           transform: scale(1.015) rotate(5deg);
         }
+
         100% {
           transform: scale(1) rotate(8deg);
         }
@@ -427,20 +458,18 @@
 
       .circle {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        width: 1180px;
+        height: 1180px;
+        right: -360px;
+        bottom: -420px;
+        border-radius: 50%;
         background: radial-gradient(
-          circle at 52% 48%,
+          circle at 42% 38%,
           #f06a66 0%,
-          #e53935 42%,
+          #e53935 45%,
           #cf2f2b 100%
         );
-        clip-path: circle(760px at right 820px);
-        transition:
-          background 0.4s ease,
-          clip-path 0.18s ease-out;
+        transition: background 0.4s ease;
         z-index: 1;
         overflow: hidden;
       }
@@ -477,10 +506,12 @@
           opacity: 0.18;
           transform: scale(0.96);
         }
+
         50% {
           opacity: 0.28;
           transform: scale(1.03);
         }
+
         100% {
           opacity: 0;
           transform: scale(1.06);
@@ -492,14 +523,17 @@
           opacity: 0.14;
           transform: scale(0.98) translateX(0);
         }
+
         35% {
           opacity: 0.22;
           transform: scale(1.01) translateX(-10px);
         }
+
         70% {
           opacity: 0.18;
           transform: scale(1.03) translateX(8px);
         }
+
         100% {
           opacity: 0;
           transform: scale(1.05) translateX(0);
@@ -511,10 +545,12 @@
           opacity: 0.16;
           transform: scale(0.98) translateY(14px);
         }
+
         60% {
           opacity: 0.24;
           transform: scale(1.02) translateY(-6px);
         }
+
         100% {
           opacity: 0;
           transform: scale(1.05) translateY(0);
@@ -526,14 +562,17 @@
           opacity: 0.16;
           transform: scale(0.98);
         }
+
         45% {
           opacity: 0.24;
           transform: scale(1.025);
         }
+
         75% {
           opacity: 0.12;
           transform: scale(1.01);
         }
+
         100% {
           opacity: 0;
           transform: scale(1.04);
@@ -560,6 +599,7 @@
           height: 20px;
           opacity: 0.55;
         }
+
         100% {
           width: 420px;
           height: 420px;
@@ -615,7 +655,20 @@
         }
 
         .circle {
-          clip-path: circle(620px at right 760px);
+          width: 820px;
+          height: 820px;
+          right: -320px;
+          bottom: -300px;
+        }
+
+        .actionButtons {
+          gap: 10px;
+        }
+
+        .listenBtn,
+        .melonBtn {
+          min-width: 150px;
+          padding: 12px 22px;
         }
       }
     </style>
@@ -672,14 +725,27 @@
             싱글이자 타이틀곡.
           </p>
 
-          <a
-            href="#"
-            onclick="
-              playCurrentAudio();
-              return false;
-            "
-            >도입부 1분 듣기</a
-          >
+          <div class="actionButtons">
+            <a
+              href="#"
+              class="listenBtn"
+              onclick="
+                playCurrentAudio();
+                return false;
+              "
+            >
+              도입부 1분 듣기
+            </a>
+
+            <a
+              href="https://www.melon.com/"
+              class="melonBtn"
+              id="melonBtn"
+              target="_blank"
+            >
+              멜론으로 가기
+            </a>
+          </div>
         </div>
 
         <div class="imgBox">
@@ -735,9 +801,21 @@
       </ul>
 
       <ul class="sci">
-        <li><a href="#">TOP</a></li>
-        <li><a href="#">NEW</a></li>
-        <li><a href="#">DJ</a></li>
+        <li>
+          <a href="https://www.melon.com/chart/index.htm" target="_blank"
+            >TOP</a
+          >
+        </li>
+        <li>
+          <a href="https://www.melon.com/new/index.htm" target="_blank">NEW</a>
+        </li>
+        <li>
+          <a
+            href="https://www.melon.com/dj/today/djtoday_list.htm"
+            target="_blank"
+            >DJ</a
+          >
+        </li>
       </ul>
 
       <audio id="audioPlayer"></audio>
@@ -755,10 +833,11 @@
           desc: "2026년 4월 20일에 발매된 CORTIS의 두 번째 EP 《GREENGREEN》의 리드 싱글이자 타이틀곡.",
           circle: "#E53935",
           gradient:
-            "radial-gradient(circle at 52% 48%, #f06a66 0%, #E53935 42%, #cf2f2b 100%)",
+            "radial-gradient(circle at 42% 38%, #f06a66 0%, #E53935 45%, #cf2f2b 100%)",
           titleColor: "#E53935",
           image: "./images/redred.png",
           audio: "./audio/redred.mp3",
+          melonLink: "https://www.melon.com/",
           motionClass: "motion-red",
         },
         {
@@ -768,10 +847,11 @@
           desc: "2026년 4월 7일에 발매된 AKMU의 네 번째 정규 앨범.",
           circle: "#58d2b2",
           gradient:
-            "radial-gradient(circle at 52% 48%, #7de2c7 0%, #58d2b2 42%, #43bea0 100%)",
+            "radial-gradient(circle at 42% 38%, #7de2c7 0%, #58d2b2 45%, #43bea0 100%)",
           titleColor: "#26b48f",
           image: "./images/paradise of rumors.jpg",
           audio: "./audio/paradise-of-rumors.mp3",
+          melonLink: "https://www.melon.com/",
           motionClass: "motion-mint",
         },
         {
@@ -781,10 +861,11 @@
           desc: "2026년 4월 30일에 발매된 ILLIT의 네 번째 미니 앨범.",
           circle: "#5DADEC",
           gradient:
-            "radial-gradient(circle at 52% 48%, #72acf0 0%, #5DADEC 42%, #357bd0 100%)",
+            "radial-gradient(circle at 42% 38%, #72acf0 0%, #5DADEC 45%, #357bd0 100%)",
           titleColor: "#2D9CDB",
           image: "./images/its me.png",
           audio: "./audio/its-me.mp3",
+          melonLink: "https://www.melon.com/",
           motionClass: "motion-blue",
         },
         {
@@ -794,10 +875,11 @@
           desc: "2026년 3월 17일에 발매된 최예나의 디지털 싱글이자 미니 5집 LOVE CATCHER의 타이틀곡 캐치 캐치의 리믹스 음원이다.",
           circle: "#ff86b5",
           gradient:
-            "radial-gradient(circle at 52% 48%, #ffaad0 0%, #ff86b5 42%, #f56aa3 100%)",
+            "radial-gradient(circle at 42% 38%, #ffaad0 0%, #ff86b5 45%, #f56aa3 100%)",
           titleColor: "#ff5d9f",
           image: "./images/sped up.png",
           audio: "./audio/sped-up.mp3",
+          melonLink: "https://www.melon.com/",
           motionClass: "motion-pink",
         },
       ];
@@ -843,8 +925,10 @@
         document.getElementById("albumArtist").innerHTML = song.artist;
 
         const circle = document.getElementById("bgCircle");
-        circle.style.background = song.gradient;
+        circle.style.background = song.gradient || song.circle;
+
         document.getElementById("mainTitle").style.color = song.titleColor;
+        document.getElementById("melonBtn").href = song.melonLink;
 
         document.getElementById("albumImage").src = song.image;
         document.getElementById("albumImage").alt = song.title + " 이미지";
@@ -895,7 +979,6 @@
 
       const heroSection = document.getElementById("heroSection");
       const recordWrap = document.querySelector(".recordWrap");
-      const bgCircle = document.getElementById("bgCircle");
 
       heroSection.addEventListener("mousemove", function (event) {
         const rect = heroSection.getBoundingClientRect();
@@ -906,8 +989,8 @@
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
 
-        const rotateX = ((y - centerY) / centerY) * -4;
-        const rotateY = ((x - centerX) / centerX) * 4;
+        const rotateX = ((y - centerY) / centerY) * -3;
+        const rotateY = ((x - centerX) / centerX) * 3;
 
         recordWrap.style.transform =
           "perspective(900px) rotateX(" +
@@ -915,23 +998,11 @@
           "deg) rotateY(" +
           rotateY +
           "deg)";
-
-        const moveX = (x / rect.width - 0.5) * 12;
-        const moveY = (y / rect.height - 0.5) * 12;
-
-        bgCircle.style.clipPath =
-          "circle(760px at calc(100% + " +
-          moveX +
-          "px) calc(820px + " +
-          moveY +
-          "px))";
       });
 
       heroSection.addEventListener("mouseleave", function () {
         recordWrap.style.transform =
           "perspective(900px) rotateX(0deg) rotateY(0deg)";
-
-        bgCircle.style.clipPath = "circle(760px at right 820px)";
       });
     </script>
   </body>
